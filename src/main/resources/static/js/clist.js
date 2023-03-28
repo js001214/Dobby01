@@ -25,54 +25,51 @@
 
   		});
 	});  
-	//회사 정보 등록 
 	$(document).ready(function() {
 	$("#company_save").click(function() {
 		
-		var name=$('#name').val();
-		var cname=$('#cname').val();
-		var address=$('#caddr'+'_'+'#caddr_detail').val();
-		var cnumber=$('#cnumber').val();
-		var number=$('#number').val();
+		// 회사 정보 입력 값 가져오기
+		var name = $('#name').val();
+		var cname = $('#cname').val();
+		var address = $('#caddr').val() + ' ' + $('#caddr_detail').val();
+		var cnumber = $('#cnumber').val();
+		var number = $('#number').val();
 
-		if(cname.length==0 || caddr.length==0 || cnumber.length==0 || number.length==0){
+		// 입력값이 빈 경우 알림창 띄우기
+		if (cname.length === 0 || address.length === 0 || cnumber.length === 0 || number.length === 0) {
 			alert('데이터를 입력하셔야 합니다.');
-			
-		}else{
-        
-        // ajax 요청
-        $.ajax({
-    		url: '/clist/save',
-    		method: 'POST',
-    		contentType: 'application/json',
-    		data: JSON.stringify({
-				name: $('#name').val(),//이름
-        		cname: $('#cname').val(),//회사명
-        		address: $('#caddr'+'_'+'#caddr_detail').val(),//주소
-       			cn: $('#cnumber').val(), //사업자등록번호
-       			number: $('#number').val() //전화번호
-    		}),
-    		success: function(response) {
-        	console.log(response); // 저장된 회사 정보 출력
-    		},
-    		error: function(error) {
-        		console.log(error);
-    		}
+		} else {
+			// ajax 요청
+			$.ajax({
+				url: '/clist/save',
+				method: 'POST',
+				contentType: 'application/json',
+				data: JSON.stringify({
+					name: name,
+					cname: cname,
+					address: address,
+					cn: cnumber,
+					number: number
+				}),
+				success: function(response) {
+					console.log(response); // 저장된 회사 정보 출력
+				},
+				error: function(error) {
+					console.log(error);
+				}
 			});
-
 			
-			
-			$("#modal").attr("style", "display:none");
+			// 회사 정보 목록에 추가하기
 			$(".company_board").append("<div>"+cname+"</div>");
-			$("#cname").val('');
-  			$("#caddr").val('');
-  			$("#cnumber").val('');
-  			$("#number").val('');
-  			$("#caddr_detail").val('');
-  			$("#name").val('');
-			}
-		});
+			
+			// 입력값 초기화
+			$("#cname, #caddr, #cnumber, #number, #caddr_detail, #name").val('');
+			
+			// 모달 닫기
+			$("#modal").attr("style", "display:none");
+		}
 	});
+});
 	//주소 api
 	$(document).ready(function() {
 		$("#caddr").click(function() {
@@ -85,5 +82,22 @@
 			}).open();
 		});
 	});
+$(function() {
+  $.ajax({
+    url: '/main',
+    type: 'GET',
+    dataType: 'json',
+    success: function(data) {
+      var companyboard = $('#company_board');
+      $.each(data, function(index, company) {
+        companyboard.append('<p>' + company.name + '</p>');
+      });
+    },
+    error: function(error) {
+		console.log(error)
+      alert('회사 리스트를 불러오는데 실패했습니다.');
+    }
+  });
+});
 	
 	

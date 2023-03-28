@@ -1,21 +1,19 @@
 package com.dobby.entity;
 
-import java.time.LocalDateTime;
 import java.util.List;
-
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import lombok.Data;
+import jakarta.persistence.OneToMany;
+import lombok.Getter;
+import lombok.Setter;
 
 
-@Data
+@Getter
+@Setter
 @Entity
 public class Company {
 	
@@ -39,11 +37,9 @@ public class Company {
 	private String name;
 	
 	//등록일
-	@CreatedDate
-	private LocalDateTime regDate;
+//	private LocalDateTime regDate;
 	//수정일
-	@LastModifiedDate
-	private LocalDateTime modifyDate;
+//	private LocalDateTime modifyDate;
 	//삭제일
 //	private LocalDateTime deleteDate;
 
@@ -51,7 +47,7 @@ public class Company {
 	//삭제여부
 	private Boolean delete;
 	
-	@ManyToMany
+	@OneToMany
 	private List<Users> userId; 
 
 }

@@ -1,5 +1,7 @@
 package com.dobby.cList.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.dobby.cList.repository.CListRepository;
@@ -11,10 +13,15 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class CListService {
 	
-	private final CListRepository clistrepository;
+	private final CListRepository cListRepository;
 	
-	 public Company saveCompany(Company company) {
-	        return clistrepository.save(company);
-	    }
+	public List<Company> companyList(){
+		return cListRepository.findAll();
+	}
+	
+	
+	public Company saveCompany(Company company) {
+		return cListRepository.save(company);
+	}
 	
 }
