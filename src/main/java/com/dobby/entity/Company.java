@@ -1,11 +1,16 @@
 package com.dobby.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
@@ -34,17 +39,19 @@ public class Company {
 	private String name;
 	
 	//등록일
+	@CreatedDate
 	private LocalDateTime regDate;
 	//수정일
+	@LastModifiedDate
 	private LocalDateTime modifyDate;
 	//삭제일
-	private LocalDateTime deleteDate;
+//	private LocalDateTime deleteDate;
 
 	
 	//삭제여부
 	private Boolean delete;
 	
-	@ManyToOne
-	private Users userId; 
+	@ManyToMany
+	private List<Users> userId; 
 
 }
