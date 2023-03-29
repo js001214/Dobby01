@@ -15,8 +15,14 @@
 		text-align:center;
 		border: 1px solid black;
 		height: 300px;
+		overflow-y: scroll;
 	}
-	.company_board div{
+	
+	.company_board table{
+		width: 100%;
+	}
+	
+	.company_board td{
 		border: 1px solid black;
 		margin: 2px;
 	}

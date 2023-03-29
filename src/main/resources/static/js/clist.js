@@ -60,16 +60,16 @@
 			});
 			
 			// 회사 정보 목록에 추가하기
-			$(".company_board").append("<div>"+cname+"</div>");
+			//$("#postList").append("<tr>"+"<td>"+cname+"</td>"+"</tr>");
 			
 			// 입력값 초기화
 			$("#cname, #caddr, #cnumber, #number, #caddr_detail, #name").val('');
 			
 			// 모달 닫기
 			$("#modal").attr("style", "display:none");
-		}
-	});
-});
+				}
+			});
+		});
 	//주소 api
 	$(document).ready(function() {
 		$("#caddr").click(function() {
@@ -82,22 +82,23 @@
 			}).open();
 		});
 	});
-$(function() {
-  $.ajax({
-    url: '/main',
-    type: 'GET',
-    dataType: 'json',
-    success: function(data) {
-      var companyboard = $('#company_board');
-      $.each(data, function(index, company) {
-        companyboard.append('<p>' + company.name + '</p>');
-      });
-    },
-    error: function(error) {
-		console.log(error)
-      alert('회사 리스트를 불러오는데 실패했습니다.');
-    }
-  });
-});
+
+	$(document).ready(function() {
+	  // 게시글 목록 조회
+	  $.ajax({
+	    url: '/posts',
+	    method: 'GET',
+	    success: function(company) {
+	      // 게시글 목록 출력
+	      for (let i = 0; i < company.length; i++) {
+	        $('#postList').append('<tr>'+'<td>' + company[i].cname + '</td>'+'</tr>');
+	      }
+	    }
+	  });
+	});
 	
+		
+	
+
+		
 	
